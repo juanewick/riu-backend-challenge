@@ -1,5 +1,6 @@
 package com.riu.backend.challenge.adapter.in.rest.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.riu.backend.challenge.domain.model.Search;
 import com.riu.backend.challenge.domain.model.SearchCount;
 
@@ -13,7 +14,9 @@ public record SearchCountResponse (
 ) {
     public record SearchResponse(
         String hotelId,
+        @JsonFormat(pattern = "dd/MM/uuuu")
         LocalDate checkIn,
+        @JsonFormat(pattern = "dd/MM/uuuu")
         LocalDate checkOut,
         List<Integer> ages
     ){

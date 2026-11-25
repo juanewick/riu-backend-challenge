@@ -32,8 +32,8 @@ class CreateSearchWithKafkaDownIT extends IntegrationTestBase {
                         .content("""
                                 {
                                   "hotelId": "1234aBc",
-                                  "checkIn": "2023-12-29",
-                                  "checkOut": "2023-12-31",
+                                  "checkIn": "29/12/2023",
+                                  "checkOut": "31/12/2023",
                                   "ages": [30, 29, 1, 3]
                                 }
                                 """))
