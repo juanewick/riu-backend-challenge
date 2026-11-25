@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/FREEPDB1
-    username: riu
-    password: riu-local-dev
+    username: ${ORACLE_APP_USER:riu}
+    password: ${ORACLE_APP_PASSWORD:riu}
 
   jpa:
     hibernate:
@@ -18,8 +18,18 @@ spring:
       group-id: riu-backend-challenge
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.riu.backend.challenge.domain.model"
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       acks: all
+      properties:
+        max.block.ms: 5000
+        request.timeout.ms: 5000
+        delivery.timeout.ms: 10000
+
+riu:
+  kafka:
+    searches-topic: ${RIU_KAFKA_SEARCHES_TOPIC:hotel_availability_searches}
