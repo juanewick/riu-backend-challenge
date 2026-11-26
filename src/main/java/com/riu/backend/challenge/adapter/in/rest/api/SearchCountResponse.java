@@ -14,9 +14,9 @@ public record SearchCountResponse (
 ) {
     public record SearchResponse(
         String hotelId,
-        @JsonFormat(pattern = "dd/MM/uuuu")
+        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate checkIn,
-        @JsonFormat(pattern = "dd/MM/uuuu")
+        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate checkOut,
         List<Integer> ages
     ){

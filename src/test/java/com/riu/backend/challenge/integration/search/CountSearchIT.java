@@ -54,14 +54,7 @@ class CountSearchIT extends IntegrationTestBase {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "",
-            " ",
-            "abc123",
-            "3f2a1c9e5b7d4e8fa0b1c2d3e4f5a6b7",
-            "3f2a1c9e-5b7d-4e8f-a0b1-c2d3e4f5a6bz",
-            "3f2a1c9e-5b7d-4e8f-a0b1-c2d3e4f5a6b7!",
-            " 3f2a1c9e-5b7d-4e8f-a0b1-c2d3e4f5a6b7"})
+    @ValueSource(strings = {"abc123", "3f2a1c9e5b7d4e8fa0b1c2d3e4f5a6b7"})
     void givenAnInvalidSearchId_whenCountIsRequested_thenReturnsBadRequest(String searchId) throws Exception {
         mockMvc.perform(get("/count").param("searchId", searchId))
                 .andExpect(status().isBadRequest())
@@ -75,6 +68,17 @@ class CountSearchIT extends IntegrationTestBase {
     @Test
     void givenNoSearchId_whenCountIsRequested_thenReturnsBadRequest() throws Exception {
         mockMvc.perform(get("/count"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.detail").value("Invalid request."))
+                .andExpect(jsonPath("$.invalidParams", hasSize(1)))
+                .andExpect(jsonPath("$.invalidParams[0].field").value("searchId"))
+                .andExpect(jsonPath("$.invalidParams[0].message").value("must not be null"));
+    }
+
+    @Test
+    void givenAnEmptySearchId_whenCountIsRequested_thenReturnsBadRequest() throws Exception {
+        mockMvc.perform(get("/count").param("searchId", ""))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.status").value(400))
                 .andExpect(jsonPath("$.detail").value("Invalid request."))

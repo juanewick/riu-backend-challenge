@@ -11,6 +11,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.List;
 
@@ -51,6 +52,11 @@ public class RestExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     ProblemDetail handleMissingParameter(MissingServletRequestParameterException e) {
         return badRequest(List.of(new InvalidParam(e.getParameterName(), "must not be null")));
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    ProblemDetail handleTypeMismatch(MethodArgumentTypeMismatchException e) {
+        return badRequest(List.of(new InvalidParam(e.getName(), "must be a valid UUID")));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

@@ -48,7 +48,7 @@ class SearchPersistenceAdapterTest {
     }
 
     @Test
-    public void givenAnUnknownSearchId_whenFindByIdIsCalled_thenReturnsEmpty() {
+    public void givenAnUnknowSearchId_whenFindByIdIsCalled_thenReturnsEmpty() {
         when(searchJpaRepository.findById("unknown")).thenReturn(Optional.empty());
 
         assertThat(adapter.findById("unknown")).isEmpty();

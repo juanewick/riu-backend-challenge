@@ -48,7 +48,7 @@ class SearchServiceImplTest {
     }
 
     @Test
-    public void givenAValidSearch_whenCreateIsCalled_thenSavesIt() {
+    public void givenAValidSearch_whenCreateIsCalled_thenSaveIt() {
         Search search = createSearch();
 
         searchService.create(search);

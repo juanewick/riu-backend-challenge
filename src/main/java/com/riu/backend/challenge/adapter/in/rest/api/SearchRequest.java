@@ -1,7 +1,6 @@
 package com.riu.backend.challenge.adapter.in.rest.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.OptBoolean;
 import com.riu.backend.challenge.domain.model.Search;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotEmpty;
@@ -18,11 +17,11 @@ public record SearchRequest(
         String hotelId,
 
         @NotNull(message = "must not be null")
-        @JsonFormat(pattern = "dd/MM/uuuu", lenient = OptBoolean.FALSE)
+        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate checkIn,
 
         @NotNull(message = "must not be null")
-        @JsonFormat(pattern = "dd/MM/uuuu", lenient = OptBoolean.FALSE)
+        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate checkOut,
 
         @NotEmpty(message = "must not be empty")

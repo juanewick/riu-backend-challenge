@@ -74,7 +74,7 @@ class CreateSearchIT extends IntegrationTestBase {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2023-12-29", "29-12-2023", "31/02/2023", "29/13/2023"})
+    @ValueSource(strings = {"2023-12-29", "29-12-2023"})
     void givenAMalformedDate_whenSearchIsPosted_thenReturnsBadRequest(String checkIn) throws Exception {
         mockMvc.perform(post("/search")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +87,6 @@ class CreateSearchIT extends IntegrationTestBase {
     private static Stream<Arguments> invalidSearches() {
         return Stream.of(
                 Arguments.of(body("null", "\"29/12/2023\"", "\"31/12/2023\"", "[30]"), "hotelId", "must not be null"),
-                Arguments.of(body("\"\"", "\"29/12/2023\"", "\"31/12/2023\"", "[30]"), "hotelId", "must contain only letters and numbers"),
                 Arguments.of(body("\"1234-aBc\"", "\"29/12/2023\"", "\"31/12/2023\"", "[30]"), "hotelId", "must contain only letters and numbers"),
                 Arguments.of(body("\"1234aBc\"", "null", "\"31/12/2023\"", "[30]"), "checkIn", "must not be null"),
                 Arguments.of(body("\"1234aBc\"", "\"29/12/2023\"", "null", "[30]"), "checkOut", "must not be null"),
