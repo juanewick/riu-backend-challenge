@@ -49,6 +49,6 @@ Reporte de cobertura: `target/site/jacoco/index.html`.
 
 ## Mejoras pendientes
 
-- Applicar patro outbox en la salida de mensaje a Kafka, garantiza o guarda la publicacion. (no tuve tiempo de agregarlo)
+- Applicar patron outbox en la salida de mensaje a Kafka, garantiza o guarda la publicacion. (no tuve tiempo de agregarlo)
 - Dead letter topic para mensajes que fallen al consumirse.
 - Índice sobre las columnas que usa el conteo.
